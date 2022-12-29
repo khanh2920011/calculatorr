@@ -7,9 +7,13 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,btZero,btDZero,btDIV,btMINUS,btPLUS,btAC,btDEl,btON,btEQUAl,btDot,btMUTIL;
-    private TextView textviewHistory,textviewResult;
+    private TextView textviewResult,spawn;
     private String number=null;
     double lastnumber=0, firstnumber=0;
+
+    boolean operator=false;
+
+    String status = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btDEl=this.findViewById(R.id.btDEL);
         btON=this.findViewById(R.id.btON);
 
-        textviewHistory=this.findViewById(R.id.textviewHistory);
+        spawn=this.findViewById(R.id.spawn);
         textviewResult=this.findViewById(R.id.textviewResult);
 
         btZero.setOnClickListener(view -> numberclick("0"));
@@ -54,6 +58,145 @@ public class MainActivity extends AppCompatActivity {
         bt8.setOnClickListener(view -> numberclick("8"));
         bt9.setOnClickListener(view -> numberclick("9"));
 
+        btPLUS.setOnClickListener(view -> {
+            // if da nhap it nhat 1 so
+            if (operator){
+                if (status=="mutil"){
+                    MUTIL();
+                }
+                else {
+                    if (status=="div"){
+                        DIV();
+                    }
+                    else {
+                        if (status=="minus"){
+                            MINUS();
+                        }
+                        else {
+                                PLUS();
+                        }
+                    }
+                }
+            }
+            operator=false;
+            number=null;
+            status="sum";
+        });
+
+        btMINUS.setOnClickListener(view -> {
+            // if da nhap it nhat 1 so
+            if (operator){
+                if (status=="mutil"){
+                    MUTIL();
+                }
+                else {
+                    if (status=="div"){
+                        DIV();
+                    }
+                    else {
+                        if (status=="plus"){
+                            PLUS();
+                        }
+                        else {
+                                MINUS();
+                        }
+                    }
+                }
+            }
+            operator=false;
+            number=null;
+            status="minus";
+        });
+        btMUTIL.setOnClickListener(view -> {
+            // if da nhap it nhat 1 so
+            if (operator){
+                if (status=="div"){
+                    DIV();
+                }
+                else {
+                    if (status=="sum"){
+                        PLUS();
+                    }
+                    else {
+                        if (status=="minus"){
+                            MINUS();
+                        }
+                        else {
+                                MUTIL();
+                        }
+                    }
+                }
+            }
+            operator=false;
+            number=null;
+            status="mutil";
+        });
+        btDIV.setOnClickListener(view -> {
+            // if da nhap it nhat 1 so
+            if (operator){
+                if (status=="mutil"){
+                    MUTIL();
+                }
+                else {
+                    if (status=="sum"){
+                        PLUS();
+                    }
+                    else {
+                        if (status=="minus"){
+                            MINUS();
+                        }
+                        else {
+                            DIV();
+                        }
+                    }
+                }
+            }
+            operator=false;
+            number=null;
+            status="div";
+        });
+        btEQUAl.setOnClickListener(view -> {
+            // if da nhap it nhat 1 so
+            if (operator){
+                if (status=="mutil"){
+                    MUTIL();
+                }
+                else {
+                    if (status=="div"){
+                        DIV();
+                    }
+
+                    else {
+                        if (status=="minus"){
+                            MINUS();
+                        }
+                        else {
+                            if (status=="sum"){
+                                PLUS();
+                            }
+                            else {
+                                firstnumber=Double.parseDouble(textviewResult.getText().toString());
+                            }
+                        }
+                    }
+                }
+            }
+            operator=false;
+        });
+
+        btAC.setOnClickListener(view -> {
+            number=null;
+            operator=false;
+            textviewResult.setText("0");
+            spawn.setText("");
+            firstnumber=0;
+            lastnumber=0;
+        });
+
+        btDEl.setOnClickListener(view -> {
+
+        });
+
     }
 
     public void numberclick(String view ){
@@ -63,6 +206,44 @@ public class MainActivity extends AppCompatActivity {
             number=number+view;
         }
         textviewResult.setText(number);
+        operator=true;
+    }
+
+    public void MINUS(){
+        if (firstnumber==0){
+            firstnumber=Double.parseDouble(textviewResult.getText().toString());
+        } else {
+            lastnumber= Double.parseDouble(textviewResult.getText().toString());
+            firstnumber=firstnumber-lastnumber;
+        }
+        spawn.setText(""+firstnumber);
+    }
+
+    public void PLUS(){
+        lastnumber= Double.parseDouble(textviewResult.getText().toString());
+        firstnumber=firstnumber+lastnumber;
+        spawn.setText(""+firstnumber);
+    }
+
+    public void MUTIL(){
+        if (firstnumber==0){
+            firstnumber=1;
+        }
+            lastnumber= Double.parseDouble(textviewResult.getText().toString());
+            firstnumber=firstnumber*lastnumber;
+
+        spawn.setText(""+firstnumber);
+    }
+
+    public void DIV(){
+        if (firstnumber==0){
+            lastnumber=Double.parseDouble(textviewResult.getText().toString());
+            firstnumber=lastnumber;
+        } else {
+            lastnumber= Double.parseDouble(textviewResult.getText().toString());
+            firstnumber=firstnumber/lastnumber;
+        }
+        spawn.setText(""+firstnumber);
     }
 
 }
