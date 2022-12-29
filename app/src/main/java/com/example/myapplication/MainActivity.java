@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Button bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,btZero,btDZero,btDIV,btMINUS,btPLUS,btAC,btDEl,btON,btEQUAl,btDot,btMUTIL;
+    private Button bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,btZero,btPi,btDIV,btMINUS,btPLUS,btAC,btDEl,btON,btEQUAl,btDot,btMUTIL;
     private TextView textviewResult,spawn;
     private String number=null;
     double lastnumber=0, firstnumber=0;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btZero=this.findViewById(R.id.btZero);
-        btDZero=this.findViewById(R.id.btDZero);
+        btPi=this.findViewById(R.id.btPi);
         bt1=this.findViewById(R.id.bt1);
         bt2=this.findViewById(R.id.bt2);
         bt3=this.findViewById(R.id.bt3);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         textviewResult=this.findViewById(R.id.textviewResult);
 
         btZero.setOnClickListener(view -> numberclick("0"));
-        btDZero.setOnClickListener(view -> numberclick("00"));
+        btPi.setOnClickListener(view -> numberclick("3.14"));
         bt1.setOnClickListener(view -> numberclick("1"));
         bt2.setOnClickListener(view -> numberclick("2"));
         bt3.setOnClickListener(view -> numberclick("3"));
