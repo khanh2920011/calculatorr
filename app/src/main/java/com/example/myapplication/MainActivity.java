@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         textviewResult=this.findViewById(R.id.textviewResult);
 
         btZero.setOnClickListener(view -> numberclick("0"));
-        btPi.setOnClickListener(view -> numberclick("3.14"));
+        btPi.setOnClickListener(view -> numberclick("HOANG"));
         bt1.setOnClickListener(view -> numberclick("1"));
         bt2.setOnClickListener(view -> numberclick("2"));
         bt3.setOnClickListener(view -> numberclick("3"));
